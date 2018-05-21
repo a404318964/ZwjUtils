@@ -1,4 +1,4 @@
-package com.zwj.zwjutils;
+package com.github.a404318964.zwjutils;
 
 
 import com.alibaba.fastjson.JSON;
