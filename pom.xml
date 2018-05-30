@@ -4,7 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>a404318964.github.com</groupId>
+    <!--<groupId>a404318964.github.com</groupId>-->
+    <groupId>com.github.a404318964</groupId>
     <artifactId>ZwjUtils</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
@@ -34,47 +35,41 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- spring版本号 -->
-        <spring.version>4.3.13.RELEASE</spring.version>
-
-        <!-- mybatis版本号 -->
-        <mybatis.version>3.4.5</mybatis.version>
-
-        <!-- mysql驱动版本号 -->
-        <mysql-driver.version>5.1.45</mysql-driver.version>
-
 
         <!-- log4j日志包版本号 -->
-        <slf4j.version>1.7.18</slf4j.version>
+        <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
 
-        <version.jackson>2.9.3</version.jackson>
-        <version.swagger>2.7.0</version.swagger>
+        <logback.version>1.2.3</logback.version>
+        <lombok.version>1.16.20</lombok.version>
 
-        <!-- redis -->
-        <version.jedis>2.9.0</version.jedis>
+        <!--<version.jackson>2.9.3</version.jackson>-->
 
-        <!-- ehcache缓存 -->
-        <version.ehcache>2.10.4</version.ehcache>
+        <!--&lt;!&ndash; redis &ndash;&gt;-->
+        <!--<version.jedis>2.9.0</version.jedis>-->
 
-        <version.javaee-api>8.0</version.javaee-api>
+        <!--&lt;!&ndash; ehcache缓存 &ndash;&gt;-->
+        <!--<version.ehcache>2.10.4</version.ehcache>-->
 
-        <version.aspectj>1.8.13</version.aspectj>
+        <!--<version.javaee-api>8.0</version.javaee-api>-->
 
-        <!-- 数据库连接池 -->
-        <version.druid>1.1.6</version.druid>
+        <!--<version.aspectj>1.8.13</version.aspectj>-->
 
-        <!-- mybatis分页插件-->
-        <version.pagehelper>5.1.2</version.pagehelper>
+        <!--&lt;!&ndash; mybatis分页插件&ndash;&gt;-->
+        <!--<version.pagehelper>5.1.2</version.pagehelper>-->
 
         <version.fastjson>1.2.47</version.fastjson>
 
-        <version.commons-fileupload>1.3.3</version.commons-fileupload>
-        <version.commons-io>2.6</version.commons-io>
+        <!--<version.commons-fileupload>1.3.3</version.commons-fileupload>-->
+        <!--<version.commons-io>2.6</version.commons-io>-->
 
-        <version.shiro>1.4.0</version.shiro>
         <version.httpclient>4.5.4</version.httpclient>
         <version.httpasyncclient>4.1.3</version.httpasyncclient>
+
+        <commons-lang3.version>3.7</commons-lang3.version>
+
+
+
 
     </properties>
 
@@ -84,6 +79,44 @@
         <version>9</version>
     </parent>
 
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <tag>master</tag>
+        <url>https://github.com/a404318964/ZwjUtils</url>
+        <connection>https://github.com/a404318964/ZwjUtils.git</connection>
+        <developerConnection>https://github.com/a404318964/ZwjUtils</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <name>zwj</name>
+            <email>404318964@qq.com</email>
+            <organization>zwj</organization>
+        </developer>
+    </developers>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <!-- 这个id需要在setting.xml中设置  -->
+            <id>sonatype-nexus-snapshots</id>
+            <name>OSS Snapshots Repository</name>
+            <!-- 这里的url就是Issue中回复的snapshots 的repo地址-->
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>OSS Staging Repository</name>
+            <!-- 这里的url就是Issue中回复的staging 的repo地址-->
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
         <!-- 添加fastjson -->
         <dependency>
@@ -91,6 +124,64 @@
             <artifactId>fastjson</artifactId>
             <version>${version.fastjson}</version>
         </dependency>
+
+        <!-- httpclient-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${version.httpclient}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpasyncclient</artifactId>
+            <version>${version.httpasyncclient}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>${version.httpclient}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <!-- 添加日志相关jar包 -->
+        <!--<dependency>-->
+            <!--<groupId>log4j</groupId>-->
+            <!--<artifactId>log4j</artifactId>-->
+            <!--<version>${log4j.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-api</artifactId>-->
+            <!--<version>${slf4j.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-log4j12</artifactId>-->
+            <!--<version>${slf4j.version}</version>-->
+        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <!-- 简化log的使用 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
 
     </dependencies>
 
