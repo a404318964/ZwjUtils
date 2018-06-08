@@ -1,13 +1,14 @@
 package com.httpclient;
 
+import com.github.a404318964.zwjutils.GeneratorUtil;
 import com.httpclient.common.HttpConfig;
 import com.httpclient.common.HttpHeader;
 import com.httpclient.exception.HttpProcessException;
-import org.apache.commons.collections.map.HashedMap;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
-import org.apache.log4j.Logger;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -16,10 +17,12 @@ import java.util.Set;
 /**
  * Created by zwj on 2017/4/7.
  */
+@Slf4j
 public class RequestBuilder {
-    private static Logger log = Logger.getLogger(RequestBuilder.class);
-
     public static final String APPLICATION_JSON = "application/json";
+
+    // 访问编码
+    private String id;
 
     /**
      * 最大重连次数
@@ -43,16 +46,18 @@ public class RequestBuilder {
     /**
      * 存放参数
      */
-    private Map<String, Object> paramMap = new HashedMap();
+    private Map<String, Object> paramMap = new HashMap<>();
 
-
-//    private HashMap<String, String> headMap = new HashMap<String, String>();
+    public RequestBuilder() {
+        id = GeneratorUtil.generatorUUID();
+    }
 
     public RequestBuilder(String url) {
         this(url, METHOD_POST);
     }
 
     public RequestBuilder(String url, int requestMethod) {
+        this();
         this.url = url;
         this.requestMethod = requestMethod;
     }
@@ -120,6 +125,7 @@ public class RequestBuilder {
                 httpHeader.other(key, value);
             }
         }
+
         return this;
     }
 
@@ -127,14 +133,15 @@ public class RequestBuilder {
         if (httpHeader == null) {
             httpHeader = HttpHeader.custom();
         }
-        if (StringUtils.isNotBlank(value))
+        if (StringUtils.isNotBlank(value)) {
             httpHeader.contentType(value);
+        }
         return this;
     }
 
     public RequestBuilder addParam(String key, String value) {
         if (paramMap == null) {
-            paramMap = new HashedMap();
+            paramMap = new HashMap<>();
         }
 
         if (StringUtils.isNotBlank(value))
@@ -146,12 +153,35 @@ public class RequestBuilder {
         return paramMap;
     }
 
-    public ResponseBean request() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ResponseBean request(boolean addDefaultHeader) {
+//        if (addDefaultHeader) {
+//            addHeader(Constant.DEVICE_REQUEST_PARAM, Constant.THIRD_APPLICATION_DEVICE_TAG)
+//                    .addHeader(Constant.REQUEST_PARAM_TOKEN, BaseContextHandler.getToken())
+//                    .addHeader(Constant.REQUEST_PARAM_EID, BaseContextHandler.getEid())
+//                    .addHeader(Constant.REQUEST_PARAM_COMMUNITY_ID, BaseContextHandler.getCommunityId())
+//                    .addHeader(Constant.REQUEST_PARAM_APPID, BaseContextHandler.getAppId());
+//        }
         return requestHttp(this);
+    }
+
+    public ResponseBean request() {
+        return request(false);
     }
 
     private static ResponseBean requestHttp(RequestBuilder requestBuilder) {
         ResponseBean responseBean = new ResponseBean();
+        responseBean.setId(requestBuilder.getId());
+
+        log.info("request url ---> " + requestBuilder.getUrl());
+
         if (requestBuilder == null) {
             responseBean.setCode(ResponseBean.ERROR).setErrorMsg("requestBuilder is null");
         } else {
@@ -161,18 +191,22 @@ public class RequestBuilder {
                     ;
 
             if (StringUtils.isBlank(requestBuilder.getBodyContent())) {
-                if (requestBuilder.getRequestMethod() == RequestBuilder.METHOD_POST) {
-                    if (requestBuilder.getParamMap() != null) {
-                        Set<String> keySet = requestBuilder.getParamMap().keySet();
-                        Iterator<String> iterator = keySet.iterator();
-                        while (iterator.hasNext()) {
-                            String key = iterator.next();
-                            log.info("key --> " + key + ";  value --> " + requestBuilder.getParamMap().get(key));
-                        }
+
+                // 打印请求参数
+                if (requestBuilder.getParamMap() != null) {
+                    Set<String> keySet = requestBuilder.getParamMap().keySet();
+                    Iterator<String> iterator = keySet.iterator();
+                    while (iterator.hasNext()) {
+                        String key = iterator.next();
+                        log.info("net param key --> " + key + ";  value --> " + requestBuilder.getParamMap().get(key));
                     }
+                }
+
+                if (requestBuilder.getRequestMethod() == RequestBuilder.METHOD_POST) {
                     config.map(requestBuilder.getParamMap());
                 }
             } else {
+                log.info("request body --> " + requestBuilder.getBodyContent());
                 // json形式提交
                 requestBuilder.addContentType(APPLICATION_JSON);
                 config.json(requestBuilder.getBodyContent());
@@ -205,7 +239,6 @@ public class RequestBuilder {
                             sbUrl.append(key).append("=").append(requestBuilder.getParamMap().get(key));
 
                             count++;
-                            log.info("key --> " + key + ";  value --> " + requestBuilder.getParamMap().get(key));
                         }
 
                         log.info("get url ---> " + sbUrl.toString());
@@ -218,8 +251,8 @@ public class RequestBuilder {
                     result = HttpClientUtil.post(config);   //post请求
                 }
 
-                responseBean.setCode(ResponseBean.SUCCESS).setResult(result);
-                log.info("request result ---> " + result);
+                responseBean.setCode(ResponseBean.SUCCESS).setResult(result.trim());
+                log.info("request result ---> " + result.trim());
             } catch (HttpProcessException e) {
                 responseBean.setCode(ResponseBean.ERROR).setErrorMsg(e.getMessage());
                 e.printStackTrace();

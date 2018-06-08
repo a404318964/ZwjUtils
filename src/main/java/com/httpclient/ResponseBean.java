@@ -1,6 +1,6 @@
 package com.httpclient;
 
-import cc.iqcloud.cloud.command.JsonUtil;
+import com.github.a404318964.zwjutils.JsonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
@@ -10,6 +10,8 @@ import java.util.List;
  * Created by zwj on 2017/4/7.
  */
 public class ResponseBean {
+    private String id;
+
     public static int ERROR = 0;
     public static int SUCCESS = 1;
 
@@ -102,5 +104,13 @@ public class ResponseBean {
     public ResponseBean setUrl(String url) {
         this.url = url;
         return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

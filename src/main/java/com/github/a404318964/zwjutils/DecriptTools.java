@@ -3,7 +3,6 @@ package com.github.a404318964.zwjutils;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.springframework.util.Base64Utils;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -89,15 +88,15 @@ public class DecriptTools {
         return "";
     }
 
-    public static String encrypt4Mall(String content, String password) throws Exception {
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        byte[] raw = password.getBytes();
-        SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
-        IvParameterSpec iv = new IvParameterSpec(password.getBytes());// 使用CBC模式，需要一个向量iv，可增加加密算法的强度
-        cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
-        byte[] encrypted = cipher.doFinal(content.getBytes("utf-8"));
-        return Base64Utils.encodeToString(encrypted);// 此处使用BASE64做转码。
-    }
+//    public static String encrypt4Mall(String content, String password) throws Exception {
+//        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+//        byte[] raw = password.getBytes();
+//        SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
+//        IvParameterSpec iv = new IvParameterSpec(password.getBytes());// 使用CBC模式，需要一个向量iv，可增加加密算法的强度
+//        cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
+//        byte[] encrypted = cipher.doFinal(content.getBytes("utf-8"));
+//        return Base64Utils.encodeToString(encrypted);// 此处使用BASE64做转码。
+//    }
 
     // 加密
     public static String encryptAES(String content, String password) throws Exception {

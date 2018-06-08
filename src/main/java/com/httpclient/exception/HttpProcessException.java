@@ -18,9 +18,6 @@ public class HttpProcessException  extends Exception {
 		super(e);
 	}
 
-	/**
-	 * @param string
-	 */
 	public HttpProcessException(String msg) {
 		super(msg);
 	}
