@@ -8,8 +8,8 @@ import org.apache.http.impl.client.BasicCookieStore;
  * 封装Cookie
  * 
  * @author arron
- * @date 2016年1月12日 上午8:42:13 
- * @version 1.0 
+ * @version 1.0
+ * 2016年1月12日 上午8:42:13
  */
 public class HttpCookies {
 

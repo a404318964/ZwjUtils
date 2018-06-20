@@ -54,8 +54,9 @@ public class Utils {
 	 * 
 	 * @param url					资源地址
 	 * @param nvps				参数列表
+	 * @param encoding			编码
 	 * @return	返回去掉参数的url
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException 抛出异常 
 	 */
 	public static String checkHasParas(String url, List<NameValuePair> nvps, String encoding) throws UnsupportedEncodingException {
 		// 检测url中是否存在参数
@@ -73,7 +74,9 @@ public class Utils {
 	 * 
 	 * @param nvps				参数列表
 	 * @param map				参数列表（map）
-	 * @throws UnsupportedEncodingException 
+	 * @param encoding			编码
+	 * @throws UnsupportedEncodingException 抛出异常
+	 * @return 返回结果
 	 */
 	public static HttpEntity map2HttpEntity(List<NameValuePair> nvps, Map<String, Object> map, String encoding) throws UnsupportedEncodingException {
 		HttpEntity entity = null;
@@ -183,10 +186,9 @@ public class Utils {
 		}
 	}
 	
-	
 	/**
 	 * 生成参数
-	 * 参数格式“k1=v1&k2=v2”
+	 * 参数格式 k1=v1&k2=v2
 	 * 
 	 * @param paras				参数列表
 	 * @return						返回参数列表（map）
@@ -223,7 +225,7 @@ public class Utils {
 	/**
 	 * 打印消息
 	 * 
-	 * @param msg
+	 * @param msg 消息
 	 */
 	public static void info(String msg){
 		if(debug){
@@ -234,8 +236,8 @@ public class Utils {
 	/**
 	 * 打印消息和异常堆栈
 	 * 
-	 * @param msg
-	 * @param t
+	 * @param msg 消息
+	 * @param t   异常
 	 */
 	public static void infoException(String msg, Throwable t){
 		if(debug){
@@ -246,7 +248,7 @@ public class Utils {
 	/**
 	 * 打印错误消息
 	 * 
-	 * @param msg
+	 * @param msg	消息
 	 */
 	public static void error(String msg){
 		log.error(msg);
@@ -255,8 +257,8 @@ public class Utils {
 	/**
 	 * 打印错误消息和异常堆栈
 	 * 
-	 * @param msg
-	 * @param t
+	 * @param msg	消息
+	 * @param t 	异常
 	 */
 	public static void errorException(String msg, Throwable t){
 		log.error(msg, t);
@@ -265,7 +267,7 @@ public class Utils {
 	/**
 	 * 打印异常堆栈
 	 * 
-	 * @param t
+	 * @param t 	异常
 	 */
 	public static void exception(Throwable t){
 		log.error(t.getMessage(), t);
@@ -277,6 +279,7 @@ public class Utils {
 	public static void debug() {
 		debug(true);
 	}
+
 	/**
 	 * 开启或关闭打印日志
 	 */

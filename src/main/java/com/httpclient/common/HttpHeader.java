@@ -11,7 +11,7 @@ import java.util.Map;
  * 创建HttpReqHead
  * 
  * @author arron
- * @date 2015年11月9日 上午10:37:23
+ * 2015年11月9日 上午10:37:23
  * @version 1.0
  */
 public class HttpHeader {
@@ -28,18 +28,20 @@ public class HttpHeader {
 	/**
 	 * 指定客户端能够接收的内容类型
 	 * 例如：Accept: text/plain, text/html
-	 * 
-	 * @param accept
+	 * @param key		键
+	 * @param value		值
+	 * @return	返回结果
 	 */
 	public HttpHeader other(String key, String value) {
 		headerMaps.put(key, new BasicHeader(key, value));
 		return this;
 	}
+
 	/**
 	 * 指定客户端能够接收的内容类型
 	 * 例如：Accept: text/plain, text/html
-	 * 
-	 * @param accept
+	 * @param accept	客户端能够接收的内容类型
+	 * @return	返回结果
 	 */
 	public HttpHeader accept(String accept) {
 		headerMaps.put(HttpReqHead.ACCEPT,
@@ -51,7 +53,8 @@ public class HttpHeader {
 	 * 浏览器可以接受的字符编码集
 	 * 例如：Accept-Charset: iso-8859-5
 	 * 
-	 * @param acceptCharset
+	 * @param acceptCharset 浏览器可以接受的字符编码集
+	 * @return	返回结果
 	 */
 	public HttpHeader acceptCharset(String acceptCharset) {
 		headerMaps.put(HttpReqHead.ACCEPT_CHARSET,
@@ -63,7 +66,8 @@ public class HttpHeader {
 	 * 指定浏览器可以支持的web服务器返回内容压缩编码类型
 	 * 例如：Accept-Encoding: compress, gzip
 	 * 
-	 * @param acceptEncoding
+	 * @param acceptEncoding 浏览器可以支持的web服务器返回内容压缩编码类
+	 * @return	返回结果
 	 */
 	public HttpHeader acceptEncoding(String acceptEncoding) {
 		headerMaps.put(HttpReqHead.ACCEPT_ENCODING,
@@ -74,8 +78,9 @@ public class HttpHeader {
 	/**
 	 * 浏览器可接受的语言
 	 * 例如：Accept-Language: en,zh
-	 * 
-	 * @param acceptLanguage
+	 *
+     * @param acceptLanguage 浏览器可接受的语言
+     * @return	返回结果
 	 */
 	public HttpHeader acceptLanguage(String acceptLanguage) {
 		headerMaps.put(HttpReqHead.ACCEPT_LANGUAGE,
@@ -87,7 +92,8 @@ public class HttpHeader {
 	 * 可以请求网页实体的一个或者多个子范围字段
 	 * 例如：Accept-Ranges: bytes
 	 * 
-	 * @param acceptRanges
+	 * @param acceptRanges 可以请求网页实体的一个或者多个子范围字段
+	 * @return	返回结果
 	 */
 	public HttpHeader acceptRanges(String acceptRanges) {
 		headerMaps.put(HttpReqHead.ACCEPT_RANGES,
@@ -99,7 +105,8 @@ public class HttpHeader {
 	 * HTTP授权的授权证书
 	 * 例如：Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 	 * 
-	 * @param authorization
+	 * @param authorization HTTP授权的授权证书
+	 * @return	返回结果
 	 */
 	public HttpHeader authorization(String authorization) {
 		headerMaps.put(HttpReqHead.AUTHORIZATION,
@@ -111,7 +118,8 @@ public class HttpHeader {
 	 * 指定请求和响应遵循的缓存机制
 	 * 例如：Cache-Control: no-cache
 	 * 
-	 * @param cacheControl
+	 * @param cacheControl 指定请求和响应遵循的缓存机制
+	 * @return	返回结果
 	 */
 	public HttpHeader cacheControl(String cacheControl) {
 		headerMaps.put(HttpReqHead.CACHE_CONTROL,
@@ -123,8 +131,8 @@ public class HttpHeader {
 	 * 表示是否需要持久连接（HTTP 1.1默认进行持久连接）
 	 * 例如：Connection: close 短链接； Connection: keep-alive 长连接
 	 * 
-	 * @param connection
-	 * @return
+	 * @param connection 表示是否需要持久连接（HTTP 1.1默认进行持久连接）
+	 * @return	返回结果
 	 */
 	public HttpHeader connection(String connection) {
 		headerMaps.put(HttpReqHead.CONNECTION,
@@ -136,7 +144,8 @@ public class HttpHeader {
 	 * HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器
 	 * 例如：Cookie: $Version=1; Skin=new;
 	 * 
-	 * @param cookie
+	 * @param cookie cookie
+	 * @return	返回结果
 	 */
 	public HttpHeader cookie(String cookie) {
 		headerMaps.put(HttpReqHead.COOKIE,
@@ -148,7 +157,8 @@ public class HttpHeader {
 	 * 请求内容长度
 	 * 例如：Content-Length: 348
 	 * 
-	 * @param contentLength
+	 * @param contentLength 请求内容长度
+	 * @return	返回结果
 	 */
 	public HttpHeader contentLength(String contentLength) {
 		headerMaps.put(HttpReqHead.CONTENT_LENGTH,
@@ -160,7 +170,8 @@ public class HttpHeader {
 	 * 请求的与实体对应的MIME信息
 	 * 例如：Content-Type: application/x-www-form-urlencoded
 	 * 
-	 * @param contentType
+	 * @param contentType 请求的与实体对应的MIME信息
+	 * @return	返回结果
 	 */
 	public HttpHeader contentType(String contentType) {
 		headerMaps.put(HttpReqHead.CONTENT_TYPE,
@@ -172,8 +183,8 @@ public class HttpHeader {
 	 * 请求发送的日期和时间
 	 * 例如：Date: Tue, 15 Nov 2010 08:12:31 GMT
 	 * 
-	 * @param date
-	 * @return
+	 * @param date 请求发送的日期和时间
+	 * @return	返回结果
 	 */
 	public HttpHeader date(String date) {
 		headerMaps.put(HttpReqHead.DATE,
@@ -185,7 +196,8 @@ public class HttpHeader {
 	 * 请求的特定的服务器行为
 	 * 例如：Expect: 100-continue
 	 * 
-	 * @param expect
+	 * @param expect 请求的特定的服务器行为
+	 * @return	返回结果
 	 */
 	public HttpHeader expect(String expect) {
 		headerMaps.put(HttpReqHead.EXPECT,
@@ -197,7 +209,8 @@ public class HttpHeader {
 	 * 发出请求的用户的Email
 	 * 例如：From: user@email.com
 	 * 
-	 * @param from
+	 * @param from 发出请求的用户的Email
+	 * @return	返回结果
 	 */
 	public HttpHeader from(String from) {
 		headerMaps.put(HttpReqHead.FROM,
@@ -209,8 +222,8 @@ public class HttpHeader {
 	 * 指定请求的服务器的域名和端口号
 	 * 例如：Host: blog.csdn.net
 	 * 
-	 * @param host
-	 * @return
+	 * @param host 指定请求的服务器的域名和端口号
+	 * @return	返回结果
 	 */
 	public HttpHeader host(String host) {
 		headerMaps.put(HttpReqHead.HOST,
@@ -222,8 +235,8 @@ public class HttpHeader {
 	 * 只有请求内容与实体相匹配才有效
 	 * 例如：If-Match: “737060cd8c284d8af7ad3082f209582d”
 	 * 
-	 * @param ifMatch
-	 * @return
+	 * @param ifMatch 只有请求内容与实体相匹配才有效
+	 * @return	返回结果
 	 */
 	public HttpHeader ifMatch(String ifMatch) {
 		headerMaps.put(HttpReqHead.IF_MATCH,
@@ -235,8 +248,8 @@ public class HttpHeader {
 	 * 如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码
 	 * 例如：If-Modified-Since: Sat, 29 Oct 2010 19:43:31 GMT
 	 * 
-	 * @param ifModifiedSince
-	 * @return
+	 * @param ifModifiedSince 如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码
+	 * @return	返回结果
 	 */
 	public HttpHeader ifModifiedSince(String ifModifiedSince) {
 		headerMaps.put(HttpReqHead.IF_MODIFIED_SINCE,
@@ -248,8 +261,8 @@ public class HttpHeader {
 	 * 如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变
 	 * 例如：If-None-Match: “737060cd8c284d8af7ad3082f209582d”
 	 * 
-	 * @param ifNoneMatch
-	 * @return
+	 * @param ifNoneMatch 参数
+	 * @return	返回结果
 	 */
 	public HttpHeader ifNoneMatch(String ifNoneMatch) {
 		headerMaps.put(HttpReqHead.IF_NONE_MATCH,
@@ -261,8 +274,8 @@ public class HttpHeader {
 	 * 如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为Etag
 	 * 例如：If-Range: “737060cd8c284d8af7ad3082f209582d”
 	 * 
-	 * @param ifRange
-	 * @return
+	 * @param ifRange 参数
+	 * @return	返回结果
 	 */
 	public HttpHeader ifRange(String ifRange) {
 		headerMaps.put(HttpReqHead.IF_RANGE,
@@ -274,8 +287,8 @@ public class HttpHeader {
 	 * 只在实体在指定时间之后未被修改才请求成功
 	 * 例如：If-Unmodified-Since: Sat, 29 Oct 2010 19:43:31 GMT
 	 * 
-	 * @param ifUnmodifiedSince
-	 * @return
+	 * @param ifUnmodifiedSince 参数
+	 * @return	返回结果
 	 */
 	public HttpHeader ifUnmodifiedSince(String ifUnmodifiedSince) {
 		headerMaps.put(HttpReqHead.IF_UNMODIFIED_SINCE,
@@ -287,8 +300,8 @@ public class HttpHeader {
 	 * 限制信息通过代理和网关传送的时间
 	 * 例如：Max-Forwards: 10
 	 * 
-	 * @param maxForwards
-	 * @return
+	 * @param maxForwards 参数
+	 * @return	返回结果
 	 */
 	public HttpHeader maxForwards(String maxForwards) {
 		headerMaps.put(HttpReqHead.MAX_FORWARDS,
@@ -300,8 +313,8 @@ public class HttpHeader {
 	 * 用来包含实现特定的指令
 	 * 例如：Pragma: no-cache
 	 * 
-	 * @param pragma
-	 * @return
+	 * @param pragma 用来包含实现特定的指令
+	 * @return	返回结果
 	 */
 	public HttpHeader pragma(String pragma) {
 		headerMaps.put(HttpReqHead.PRAGMA,
@@ -313,7 +326,8 @@ public class HttpHeader {
 	 * 连接到代理的授权证书
 	 * 例如：Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 	 * 
-	 * @param proxyAuthorization
+	 * @param proxyAuthorization 连接到代理的授权证书
+     * @return	返回结果
 	 */
 	public HttpHeader proxyAuthorization(String proxyAuthorization) {
 		headerMaps.put(HttpReqHead.PROXY_AUTHORIZATION,
@@ -325,7 +339,8 @@ public class HttpHeader {
 	 * 只请求实体的一部分，指定范围
 	 * 例如：Range: bytes=500-999
 	 * 
-	 * @param range
+	 * @param range 范围
+     * @return	返回结果
 	 */
 	public HttpHeader range(String range) {
 		headerMaps.put(HttpReqHead.RANGE,
@@ -337,7 +352,8 @@ public class HttpHeader {
 	 * 先前网页的地址，当前请求网页紧随其后,即来路
 	 * 例如：Referer: http://www.zcmhi.com/archives/71.html
 	 * 
-	 * @param referer
+	 * @param referer 参数
+     * @return	返回结果
 	 */
 	public HttpHeader referer(String referer) {
 		headerMaps.put(HttpReqHead.REFERER,
@@ -349,7 +365,8 @@ public class HttpHeader {
 	 * 客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息
 	 * 例如：TE: trailers,deflate;q=0.5
 	 * 
-	 * @param te
+	 * @param te 参数
+     * @return	返回结果
 	 */
 	public HttpHeader te(String te) {
 		headerMaps.put(HttpReqHead.TE,
@@ -361,7 +378,8 @@ public class HttpHeader {
 	 * 向服务器指定某种传输协议以便服务器进行转换（如果支持）
 	 * 例如：Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11
 	 * 
-	 * @param upgrade
+	 * @param upgrade 参数
+     * @return	返回结果
 	 */
 	public HttpHeader upgrade(String upgrade) {
 		headerMaps.put(HttpReqHead.UPGRADE,
@@ -372,8 +390,8 @@ public class HttpHeader {
 	/**
 	 * User-Agent的内容包含发出请求的用户信息
 	 * 
-	 * @param userAgent
-	 * @return
+	 * @param userAgent 参数
+	 * @return	返回结果
 	 */
 	public HttpHeader userAgent(String userAgent) {
 		headerMaps.put(HttpReqHead.USER_AGENT,
@@ -385,8 +403,8 @@ public class HttpHeader {
 	 * 关于消息实体的警告信息
 	 * 例如：Warn: 199 Miscellaneous warning
 	 * 
-	 * @param warning
-	 * @return
+	 * @param warning 参数
+	 * @return	返回结果
 	 */
 	public HttpHeader warning(String warning) {
 		headerMaps.put(HttpReqHead.WARNING,
@@ -398,8 +416,8 @@ public class HttpHeader {
 	 * 通知中间网关或代理服务器地址，通信协议
 	 * 例如：Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)
 	 * 
-	 * @param via
-	 * @return
+	 * @param via 参数
+	 * @return	返回结果
 	 */
 	public HttpHeader via(String via) {
 		headerMaps.put(HttpReqHead.VIA,
@@ -411,8 +429,8 @@ public class HttpHeader {
 	 * 设置此HTTP连接的持续时间（超时时间）
 	 * 例如：Keep-Alive: 300
 	 * 
-	 * @param keepAlive
-	 * @return
+	 * @param keepAlive 超时时间
+	 * @return	返回结果
 	 */
 	public HttpHeader keepAlive(String keepAlive) {
 		headerMaps.put(HttpReqHead.KEEP_ALIVE,
@@ -544,7 +562,7 @@ public class HttpHeader {
 	/**
 	 * 获取head信息
 	 * 
-	 * @return
+	 * @return	返回结果
 	 */
 	private String get(String headName) {
 		if (headerMaps.containsKey(headName)) {
@@ -556,7 +574,7 @@ public class HttpHeader {
 	/**
 	 * 返回header头信息
 	 * 
-	 * @return
+	 * @return	返回结果
 	 */
 	public Header[] build() {
 		Header[] headers = new Header[headerMaps.size()];
@@ -574,7 +592,7 @@ public class HttpHeader {
 	 * Http头信息
 	 * 
 	 * @author arron
-	 * @date 2015年11月9日 上午11:29:04
+	 * 2015年11月9日 上午11:29:04
 	 * @version 1.0
 	 */
 	private static class HttpReqHead {
@@ -615,7 +633,7 @@ public class HttpHeader {
 	 * 常用头信息配置
 	 * 
 	 * @author arron
-	 * @date 2015年11月18日 下午5:30:00 
+	 * 2015年11月18日 下午5:30:00
 	 * @version 1.0
 	 */
 	public static class Headers{

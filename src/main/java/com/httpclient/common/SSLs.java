@@ -21,7 +21,7 @@ import java.security.cert.CertificateException;
  * 设置ssl
  * 
  * @author arron
- * @date 2015年11月3日 下午3:11:54
+ * 2015年11月3日 下午3:11:54
  * @version 1.0
  */
 public class SSLs {
@@ -151,7 +151,7 @@ public class SSLs {
      * The SSL protocol version (SSLv3, TLSv1, TLSv1.1, TLSv1.2)
      * 
      * @author arron
-     * @date 2016年11月18日 上午9:35:37 
+     * 2016年11月18日 上午9:35:37
      * @version 1.0
      */
     public static enum SSLProtocolVersion{
